@@ -32,7 +32,6 @@ namespace WebAPICRUD.Controllers
                 FullName = addContacRequest.FullName,
                 Phone = addContacRequest.Phone
             };
-
             await dbContext.Contacts.AddAsync(contact);
             await dbContext.SaveChangesAsync();
             return Ok(contact);
