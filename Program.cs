@@ -10,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ContactsAPIDbContext>(opt => opt.UseInMemoryDatabase("ContactsDb"));
+//builder.Services.AddDbContext<ContactsAPIDbContext>(opt => opt.UseInMemoryDatabase("ContactsDb"));
+builder.Services.AddDbContext<ContactsAPIDbContext>(opt => 
+opt.UseSqlServer(builder.Configuration.GetConnectionString("ContactsApiConnectionString")));
 
 var app = builder.Build();
 
