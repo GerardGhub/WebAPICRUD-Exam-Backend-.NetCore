@@ -23,7 +23,7 @@ namespace WebAPICRUD.Controllers
 
         [HttpGet]
         [Route("{id:guid}")]
-        public async Task<IActionResult> GetContact([FromRoute] Guid guid)
+        public async Task<IActionResult> GetContact([FromRoute] Guid id)
         {
             var contact = await dbContext.Contacts.FindAsync(id);
 
@@ -72,16 +72,15 @@ namespace WebAPICRUD.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
-        public async Task<IActionResult> DeleteContact([FromRoute] Guid guid)
+        public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
         {
            var contact = await dbContext.Contacts.FindAsync(id);
-
             if (contact != null)
             {
                 dbContext.Remove(contact);
-                await dbContext.SaveChangesAsync()
+                await dbContext.SaveChangesAsync();
+                return Ok(contact);
             }
-
             return NotFound();
         }
 
